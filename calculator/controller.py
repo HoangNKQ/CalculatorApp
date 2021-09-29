@@ -45,7 +45,11 @@ class Controller:
         '''
         Function performed when an input button is clicked
         '''
-        self.save_expression(button)
+        if button not in ['+', '-', '*', '/']:
+            self.save_expression(button)
+        else:
+            self.operator()
+            self.save_expression(button)
         self.view.insert_expression(self.expression)
 
 
@@ -56,9 +60,18 @@ class Controller:
         # print(self.new_expression)
         if self.is_new_expression:
             self.expression = text
-            self.new_expression = False
+            self.is_new_expression = False
         else:
             self.expression += text
+
+
+    def operator(self):
+        if self.is_result:
+            self.expression = self.result
+            self.is_new_expression = False
+            self.is_result = False
+        else:
+            self.is_new_expression = False
 
 
 
@@ -71,6 +84,7 @@ class Controller:
         self.is_new_expression = True
         self.is_result = True
 
+
     def evaluate(self, expression):
         '''
         Calculate the result of entered expression
@@ -78,7 +92,11 @@ class Controller:
         try:
             self.result = str(eval(expression))
         except SyntaxError:
-            self.result = 'Syntax Error'
+            self.view.insert_result('Syntax Error')
+            self.is_new_expression = True
+            self.is_result = False
+
+
 
 
     def clear_calculator(self):
