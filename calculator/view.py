@@ -10,7 +10,7 @@ class View(tk.Tk):
         self.title ('Calculator')
         self.geometry('400x500')
         self.tk.call("source", "theme\sun-valley.tcl")
-        self.tk.call("set_theme", "dark")
+        self.tk.call("set_theme", "light")
 
         self.button_text = ''
         self.expression_text = ''
