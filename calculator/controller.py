@@ -80,7 +80,7 @@ class Controller:
         Function performed when equal button is clicked
         '''
         self.evaluate(self.expression)
-        self.view.insert_result(self.result)
+        # self.view.insert_result(self.result)
         self.is_new_expression = True
         self.is_result = True
 
@@ -91,6 +91,7 @@ class Controller:
         '''
         try:
             self.result = str(eval(expression))
+            self.view.insert_result(self.result)
         except SyntaxError:
             self.view.insert_result('Syntax Error')
             self.is_new_expression = True
